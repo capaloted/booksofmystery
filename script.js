@@ -10,14 +10,44 @@ async function loadBooksFromAPI() {
             console.log('Books loaded successfully:', bookDatabase);
         } else {
             console.error('Failed to load books:', response.statusText);
-            // Fallback to empty database
-            bookDatabase = {};
+            // Fallback to hardcoded books
+            bookDatabase = getFallbackBooks();
         }
     } catch (error) {
         console.error('Error loading books:', error);
-        // Fallback to empty database
-        bookDatabase = {};
+        // Fallback to hardcoded books
+        bookDatabase = getFallbackBooks();
     }
+}
+
+// Fallback books if API fails
+function getFallbackBooks() {
+    return {
+        mystery: [
+            { title: "The Silent Patient", author: "Alex Michaelides", description: "A psychological thriller about a woman who refuses to speak after allegedly murdering her husband.", price: 5.00 },
+            { title: "Gone Girl", author: "Gillian Flynn", description: "A dark psychological thriller about a marriage gone terribly wrong.", price: 5.00 }
+        ],
+        thriller: [
+            { title: "The Da Vinci Code", author: "Dan Brown", description: "A symbologist and a cryptologist race to solve a murder and uncover a secret.", price: 5.00 },
+            { title: "The Bourne Identity", author: "Robert Ludlum", description: "A man with no memory must discover his true identity while being hunted.", price: 5.00 }
+        ],
+        horror: [
+            { title: "The Shining", author: "Stephen King", description: "A family becomes caretakers of a haunted hotel during the winter.", price: 5.00 },
+            { title: "The Exorcist", author: "William Peter Blatty", description: "A young girl's demonic possession leads to a battle between good and evil.", price: 5.00 }
+        ],
+        romance: [
+            { title: "The Notebook", author: "Nicholas Sparks", description: "A timeless love story about a couple separated by war and reunited years later.", price: 5.00 },
+            { title: "Me Before You", author: "Jojo Moyes", description: "A heartwarming story about love, loss, and living life to the fullest.", price: 5.00 }
+        ],
+        fantasy: [
+            { title: "The Hobbit", author: "J.R.R. Tolkien", description: "A classic fantasy adventure about a hobbit's unexpected journey.", price: 5.00 },
+            { title: "Harry Potter and the Philosopher's Stone", author: "J.K. Rowling", description: "The magical story of a young wizard discovering his destiny.", price: 5.00 }
+        ],
+        "sci-fi": [
+            { title: "Dune", author: "Frank Herbert", description: "A science fiction epic about politics, religion, and ecology on a desert planet.", price: 5.00 },
+            { title: "The Martian", author: "Andy Weir", description: "A science fiction thriller about an astronaut stranded on Mars.", price: 5.00 }
+        ]
+    };
 }
 
 // Original book database (fallback)
