@@ -156,32 +156,43 @@ app.post('/create-checkout-session', async (req, res) => {
         if (stripeEnabled && stripe) {
             // Real Stripe checkout
             console.log('Creating real Stripe checkout session');
-            const session = await stripe.checkout.sessions.create({
-                payment_method_types: ['card'],
-                line_items: [
-                    {
-                        price_data: {
-                            currency: 'gbp',
-                            product_data: {
-                                name: bookTitle,
-                                description: 'Mystery Book Purchase',
+            try {
+                const session = await stripe.checkout.sessions.create({
+                    payment_method_types: ['card'],
+                    line_items: [
+                        {
+                            price_data: {
+                                currency: 'gbp',
+                                product_data: {
+                                    name: bookTitle,
+                                    description: 'Mystery Book Purchase',
+                                },
+                                unit_amount: 500, // £5.00 in pence
                             },
-                            unit_amount: 500, // £5.00 in pence
+                            quantity: 1,
                         },
-                        quantity: 1,
+                    ],
+                    mode: 'payment',
+                    success_url: `${req.protocol}://${req.get('host')}/success?book=${encodeURIComponent(bookTitle)}`,
+                    cancel_url: `${req.protocol}://${req.get('host')}/`,
+                    customer_email: customerEmail,
+                    billing_address_collection: 'required',
+                    shipping_address_collection: {
+                        allowed_countries: ['GB', 'US', 'CA', 'AU'],
                     },
-                ],
-                mode: 'payment',
-                success_url: `${req.protocol}://${req.get('host')}/success?book=${encodeURIComponent(bookTitle)}`,
-                cancel_url: `${req.protocol}://${req.get('host')}/`,
-                customer_email: customerEmail,
-                billing_address_collection: 'required',
-                shipping_address_collection: {
-                    allowed_countries: ['GB', 'US', 'CA', 'AU'],
-                },
-            });
-            
-            res.json({ sessionId: session.id });
+                });
+                
+                console.log('Stripe session created successfully:', session.id);
+                res.json({ sessionId: session.id });
+            } catch (stripeError) {
+                console.error('Stripe checkout session creation failed:', stripeError.message);
+                console.error('Stripe error details:', stripeError);
+                res.status(500).json({ 
+                    error: 'Stripe checkout failed', 
+                    details: stripeError.message 
+                });
+                return;
+            }
         } else {
             // Mock checkout
             console.log('Creating mock checkout session');
