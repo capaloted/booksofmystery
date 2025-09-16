@@ -1,0 +1,62 @@
+{
+  "mystery": [
+    {
+      "title": "The Silent Patient",
+      "author": "Alex Michaelides",
+      "description": "A psychological thriller about a woman who refuses to speak after allegedly murdering her husband.",
+      "price": 0.30
+    },
+    {
+      "title": "Gone Girl",
+      "author": "Gillian Flynn",
+      "description": "A dark psychological thriller about a marriage gone terribly wrong.",
+      "price": 0.30
+    },
+    {
+      "title": "The Girl with the Dragon Tattoo",
+      "author": "Stieg Larsson",
+      "description": "A journalist and a hacker investigate a decades-old disappearance.",
+      "price": 0.30
+    }
+  ],
+  "thriller": [
+    {
+      "title": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "description": "A symbologist and a cryptologist race to solve a murder and uncover a secret.",
+      "price": 0.30
+    },
+    {
+      "title": "The Bourne Identity",
+      "author": "Robert Ludlum",
+      "description": "A man with no memory must discover his true identity while being hunted.",
+      "price": 0.30
+    },
+    {
+      "title": "The Silence of the Lambs",
+      "author": "Thomas Harris",
+      "description": "An FBI trainee seeks help from a brilliant but insane cannibalistic serial killer.",
+      "price": 0.30
+    }
+  ],
+  "horror": [
+    {
+      "title": "The Shining",
+      "author": "Stephen King",
+      "description": "A family becomes caretakers of a haunted hotel during the winter.",
+      "price": 0.30
+    },
+    {
+      "title": "The Exorcist",
+      "author": "William Peter Blatty",
+      "description": "A young girl's demonic possession leads to a battle between good and evil.",
+      "price": 0.30
+    },
+    {
+      "title": "It",
+      "author": "Stephen King",
+      "description": "Seven children face their worst nightmare in the form of a shape-shifting entity.",
+      "price": 0.30
+    }
+  ]
+}

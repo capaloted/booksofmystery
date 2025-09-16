@@ -1,0 +1,31 @@
+genre,title,author,description,price
+mystery,The Silent Patient,Alex Michaelides,A psychological thriller about a woman who refuses to speak after allegedly murdering her husband,5.00
+mystery,Gone Girl,Gillian Flynn,A dark psychological thriller about a marriage gone terribly wrong,5.00
+mystery,The Girl with the Dragon Tattoo,Stieg Larsson,A journalist and a hacker investigate a decades-old disappearance,5.00
+mystery,Big Little Lies,Liane Moriarty,A suburban thriller about secrets and lies in a small coastal town,5.00
+mystery,The Murder of Roger Ackroyd,Agatha Christie,A classic whodunit with an unexpected twist ending,5.00
+thriller,The Da Vinci Code,Dan Brown,A symbologist and a cryptologist race to solve a murder and uncover a secret,5.00
+thriller,The Bourne Identity,Robert Ludlum,A man with no memory must discover his true identity while being hunted,5.00
+thriller,The Silence of the Lambs,Thomas Harris,An FBI trainee seeks help from a brilliant but insane cannibalistic serial killer,5.00
+thriller,The Girl on the Train,Paula Hawkins,A psychological thriller about a woman who becomes entangled in a missing person investigation,5.00
+thriller,The Reversal,Michael Connelly,A legal thriller about a defense attorney who switches sides to prosecute a case,5.00
+horror,The Shining,Stephen King,A family becomes caretakers of a haunted hotel during the winter,5.00
+horror,The Exorcist,William Peter Blatty,A young girl's demonic possession leads to a battle between good and evil,5.00
+horror,It,Stephen King,Seven children face their worst nightmare in the form of a shape-shifting entity,5.00
+horror,The Haunting of Hill House,Shirley Jackson,A classic ghost story about a group of people investigating a haunted mansion,5.00
+horror,Pet Sematary,Stephen King,A family discovers a mysterious burial ground that brings the dead back to life,5.00
+romance,The Notebook,Nicholas Sparks,A timeless love story about a couple separated by war and reunited years later,5.00
+romance,Me Before You,Jojo Moyes,A heartwarming story about love loss and living life to the fullest,5.00
+romance,The Time Traveler's Wife,Audrey Niffenegger,A unique love story about a man with a genetic disorder that causes him to time travel,5.00
+romance,Outlander,Diana Gabaldon,A historical romance about a World War II nurse who travels back in time to 18th century Scotland,5.00
+romance,The Fault in Our Stars,John Green,A young adult romance about two teenagers who meet in a cancer support group,5.00
+fantasy,The Hobbit,J.R.R. Tolkien,A classic fantasy adventure about a hobbit's unexpected journey,5.00
+fantasy,Harry Potter and the Philosopher's Stone,J.K. Rowling,The magical story of a young wizard discovering his destiny,5.00
+fantasy,The Name of the Wind,Patrick Rothfuss,A fantasy epic about a legendary wizard telling his life story,5.00
+fantasy,A Game of Thrones,George R.R. Martin,A complex fantasy saga about noble families fighting for control of a kingdom,5.00
+fantasy,The Way of Kings,Brandon Sanderson,A fantasy epic about a world where magic is fueled by storms,5.00
+sci-fi,Dune,Frank Herbert,A science fiction epic about politics religion and ecology on a desert planet,5.00
+sci-fi,The Martian,Andy Weir,A science fiction thriller about an astronaut stranded on Mars,5.00
+sci-fi,Foundation,Isaac Asimov,A science fiction classic about psychohistory and the fall of a galactic empire,5.00
+sci-fi,Neuromancer,William Gibson,A cyberpunk novel about a washed-up computer hacker and AI,5.00
+sci-fi,Ender's Game,Orson Scott Card,A science fiction story about child soldiers training to fight an alien race,5.00

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books of Mystery - Discover Your Next Read</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Simple Header -->
+    <header class="simple-header">
+        <div class="container">
+            <h1 class="logo-link" onclick="goToStart()">Books of Mystery</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Main Content -->
+        <div id="genre-selection" class="screen active">
+            <div class="hero">
+                <h1>Books of Mystery</h1>
+                <p>Choose your genre and discover your next favorite book</p>
+            </div>
+            
+            <div class="genre-grid">
+                <div class="genre-card" data-genre="fantasy">
+                    <div class="genre-icon">🧙‍♂️</div>
+                    <span class="genre-name">Fantasy</span>
+                </div>
+                <div class="genre-card" data-genre="mystery">
+                    <div class="genre-icon">🕵️‍♂️</div>
+                    <span class="genre-name">Mystery</span>
+                </div>
+                <div class="genre-card" data-genre="sci-fi">
+                    <div class="genre-icon">🚀</div>
+                    <span class="genre-name">Sci-Fi</span>
+                </div>
+                <div class="genre-card" data-genre="romance">
+                    <div class="genre-icon">💕</div>
+                    <span class="genre-name">Romance</span>
+                </div>
+                <div class="genre-card" data-genre="horror">
+                    <div class="genre-icon">👻</div>
+                    <span class="genre-name">Horror</span>
+                </div>
+                <div class="genre-card" data-genre="thriller">
+                    <div class="genre-icon">⚡</div>
+                    <span class="genre-name">Thriller</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gift Box Opening -->
+        <div id="present-popup" class="popup-overlay">
+            <div class="present-container">
+                <div class="present-box">
+                    <div class="present-lid" id="present-lid">
+                        <div class="present-ribbon"></div>
+                        <div class="present-bow"></div>
+                    </div>
+                    <div class="present-interior" id="present-interior">
+                        <!-- Book will appear here -->
+                    </div>
+                </div>
+                <div class="status-text">
+                    <p id="popup-message">Selecting your book...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box Opening Animation Screen -->
+        <div id="box-animation" class="screen">
+                <div class="box-container">
+                    <div class="mystery-box" id="mystery-box">
+                        <div class="box-lid" id="box-lid">
+                            <div class="box-handle"></div>
+                        </div>
+                        <div class="box-body" id="box-body">
+                            <div class="box-content" id="box-content">
+                                <div class="mystery-glow"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="animation-text">
+                    <p id="animation-message">Preparing your mystery book...</p>
+                </div>
+            </div>
+
+        <!-- Book Reveal Screen -->
+        <div id="book-reveal" class="screen">
+            <div class="book-reveal-container">
+                <div class="book-display">
+                    <div class="book-cover blurred-content">
+                        <div class="book-spine"></div>
+                        <div class="book-front">
+                            <h3 id="book-title">Book Title</h3>
+                            <p id="book-author">by Author Name</p>
+                            <span class="genre-tag" id="book-genre-badge">Genre</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="book-info blurred-content">
+                    <h2 id="revealed-title">Your Mystery Book</h2>
+                    <p id="revealed-author">by Author Name</p>
+                    <p id="book-description">Book description will appear here...</p>
+                    <div class="price">£<span id="book-price">0.00</span></div>
+                </div>
+                
+                <div class="actions">
+                    <button id="keep-mystery" class="btn-secondary">Keep Mystery</button>
+                    <button id="reveal-book" class="btn-primary">Reveal Book</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Purchase Screen -->
+        <div id="purchase-screen" class="screen">
+            <div class="purchase-container">
+                <h2>Complete Purchase</h2>
+                <div class="order-summary">
+                    <div class="book-info">
+                        <h3 id="purchase-title">Book Title</h3>
+                        <p id="purchase-author">by Author Name</p>
+                    </div>
+                    <div class="pricing">
+                        <div class="price-line">
+                            <span>Book:</span>
+                            <span id="purchase-price">£5.00</span>
+                        </div>
+                        <div class="price-line">
+                            <span>Shipping:</span>
+                            <span>£0.00</span>
+                        </div>
+                        <div class="price-line total">
+                            <span>Total:</span>
+                            <span id="purchase-total">£5.00</span>
+                        </div>
+                    </div>
+                </div>
+                <form id="checkout-form" class="checkout-form">
+                    <div class="form-section">
+                        <h3>Contact Information</h3>
+                        <p class="checkout-info">
+                            We'll redirect you to Stripe's secure checkout page to complete your payment and shipping details.
+                        </p>
+                        <input type="email" id="email" placeholder="Email address" required>
+                        <input type="text" id="name" placeholder="Full name" required>
+                    </div>
+                    
+                    <div id="card-errors" class="card-errors"></div>
+                    
+                    <button type="submit" class="btn-primary" id="submit-btn">
+                        <span id="button-text">Continue to Stripe Checkout - £5.00</span>
+                        <div id="spinner" class="spinner hidden"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="success-screen" class="screen">
+            <div class="success-container">
+                <div class="success-icon">✓</div>
+                <h2>Order Confirmed!</h2>
+                <p>Your book will be shipped within 2-3 business days.</p>
+                <p>Order #<span id="order-number">12345</span></p>
+                <button id="new-order" class="btn-primary">Start New Mystery</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Selecting your mystery book...</div>
+        </div>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="script.js"></script>
+</body>
+</html>
