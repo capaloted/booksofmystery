@@ -584,17 +584,17 @@ function proceedToPurchase(keepMystery) {
         // Show mystery purchase details
         elements.purchaseTitle.textContent = "Mystery Book";
         elements.purchaseAuthor.textContent = `Genre: ${currentGenre.charAt(0).toUpperCase() + currentGenre.slice(1)}`;
-        elements.purchasePrice.textContent = "£0.30"; // Fixed price for mystery books
+        elements.purchasePrice.textContent = "£5.00"; // Fixed price for mystery books
         
-        const total = 0.30 + 0.00; // £0.30 book + free shipping
+        const total = 5.00 + 0.00; // £5.00 book + free shipping
         elements.purchaseTotal.textContent = `£${total.toFixed(2)}`;
     } else {
         // Use the revealed book details
         elements.purchaseTitle.textContent = selectedBook.title;
         elements.purchaseAuthor.textContent = `by ${selectedBook.author}`;
-        elements.purchasePrice.textContent = "£0.30";
+        elements.purchasePrice.textContent = "£5.00";
         
-        const total = 0.30 + 0.00; // £0.30 book + free shipping
+        const total = 5.00 + 0.00; // £5.00 book + free shipping
         elements.purchaseTotal.textContent = `£${total.toFixed(2)}`;
     }
     
@@ -737,16 +737,24 @@ async function handlePayment(event) {
             throw new Error(`Server error: ${response.status}`);
         }
         
-        const {sessionId} = await response.json();
-        console.log('Checkout session created:', sessionId);
+        const data = await response.json();
+        console.log('Checkout response:', data);
         
-        // Redirect to Stripe Checkout
-        const {error} = await stripe.redirectToCheckout({
-            sessionId: sessionId
-        });
-        
-        if (error) {
-            throw new Error(error.message);
+        // Handle mock checkout response
+        if (data.checkoutUrl) {
+            // Redirect to success page
+            window.location.href = data.checkoutUrl;
+        } else if (data.sessionId) {
+            // Redirect to Stripe Checkout
+            const {error} = await stripe.redirectToCheckout({
+                sessionId: data.sessionId
+            });
+            
+            if (error) {
+                throw new Error(error.message);
+            }
+        } else {
+            throw new Error('Invalid checkout response');
         }
         
     } catch (error) {
@@ -755,7 +763,7 @@ async function handlePayment(event) {
         
         // Reset button state
         submitBtn.disabled = false;
-        buttonText.textContent = 'Complete Purchase - £0.30';
+        buttonText.textContent = 'Complete Purchase - £5.00';
         spinner.classList.add('hidden');
     }
 }
