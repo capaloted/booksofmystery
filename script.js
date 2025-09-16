@@ -737,16 +737,26 @@ async function handlePayment(event) {
             throw new Error(`Server error: ${response.status}`);
         }
         
-        const {sessionId} = await response.json();
-        console.log('Checkout session created:', sessionId);
+        const data = await response.json();
+        console.log('Checkout response:', data);
         
-        // Redirect to Stripe Checkout
-        const {error} = await stripe.redirectToCheckout({
-            sessionId: sessionId
-        });
-        
-        if (error) {
-            throw new Error(error.message);
+        // Handle both real Stripe and mock responses
+        if (data.sessionId) {
+            // Real Stripe checkout
+            console.log('Redirecting to Stripe Checkout:', data.sessionId);
+            const {error} = await stripe.redirectToCheckout({
+                sessionId: data.sessionId
+            });
+            
+            if (error) {
+                throw new Error(error.message);
+            }
+        } else if (data.checkoutUrl) {
+            // Mock checkout - redirect to success page
+            console.log('Mock checkout - redirecting to:', data.checkoutUrl);
+            window.location.href = data.checkoutUrl;
+        } else {
+            throw new Error('Invalid checkout response');
         }
         
     } catch (error) {
