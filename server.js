@@ -20,10 +20,17 @@ const PORT = process.env.PORT || 3000;
 // Book database file path
 const BOOKS_CSV_FILE = path.join(__dirname, 'books.csv');
 
-// Load books from CSV file
+// Load books from CSV file with fallback
 function loadBooks() {
     return new Promise((resolve, reject) => {
         const books = {};
+        
+        // Check if CSV file exists
+        if (!fs.existsSync(BOOKS_CSV_FILE)) {
+            console.log('CSV file not found, using fallback books');
+            resolve(getFallbackBooks());
+            return;
+        }
         
         fs.createReadStream(BOOKS_CSV_FILE)
             .pipe(csv())
@@ -37,7 +44,7 @@ function loadBooks() {
                     title: row.title,
                     author: row.author,
                     description: row.description,
-                    price: parseFloat(row.price) || 0.30
+                    price: parseFloat(row.price) || 5.00
                 });
             })
             .on('end', () => {
@@ -46,9 +53,28 @@ function loadBooks() {
             })
             .on('error', (error) => {
                 console.error('Error loading books from CSV:', error);
-                reject(error);
+                console.log('Using fallback books instead');
+                resolve(getFallbackBooks());
             });
     });
+}
+
+// Fallback books if CSV fails
+function getFallbackBooks() {
+    return {
+        mystery: [
+            { title: "The Silent Patient", author: "Alex Michaelides", description: "A psychological thriller about a woman who refuses to speak after allegedly murdering her husband.", price: 5.00 },
+            { title: "Gone Girl", author: "Gillian Flynn", description: "A dark psychological thriller about a marriage gone terribly wrong.", price: 5.00 }
+        ],
+        thriller: [
+            { title: "The Da Vinci Code", author: "Dan Brown", description: "A symbologist and a cryptologist race to solve a murder and uncover a secret.", price: 5.00 },
+            { title: "The Bourne Identity", author: "Robert Ludlum", description: "A man with no memory must discover his true identity while being hunted.", price: 5.00 }
+        ],
+        horror: [
+            { title: "The Shining", author: "Stephen King", description: "A family becomes caretakers of a haunted hotel during the winter.", price: 5.00 },
+            { title: "The Exorcist", author: "William Peter Blatty", description: "A young girl's demonic possession leads to a battle between good and evil.", price: 5.00 }
+        ]
+    };
 }
 
 // Save books to CSV file
@@ -77,6 +103,15 @@ const upload = multer({ dest: 'uploads/' });
 app.use(cors());
 app.use(express.json());
 app.use(express.static('.'));
+
+// Test endpoint
+app.get('/test', (req, res) => {
+    res.json({ 
+        message: 'Server is working!', 
+        timestamp: new Date().toISOString(),
+        stripe: stripe ? 'initialized' : 'not initialized'
+    });
+});
 
 // Create Stripe Checkout session endpoint
 app.post('/create-checkout-session', async (req, res) => {
