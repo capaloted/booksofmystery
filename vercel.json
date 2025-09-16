@@ -8,20 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/server-simple.js"
-    },
-    {
-      "src": "/test",
-      "dest": "/server-simple.js"
-    },
-    {
-      "src": "/success",
-      "dest": "/server-simple.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/server-simple.js"
     }
   ],
   "env": {

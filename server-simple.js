@@ -84,6 +84,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('.'));
 
+// Serve main page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // Test endpoint
 app.get('/test', (req, res) => {
     res.json({ 
