@@ -120,10 +120,14 @@ app.get('/script.js', (req, res) => {
 
 // Test endpoint
 app.get('/test', (req, res) => {
+    const stripeKey = process.env.STRIPE_SECRET_KEY;
     res.json({ 
         message: 'Server is working!', 
         timestamp: new Date().toISOString(),
         stripe: stripeEnabled ? 'enabled' : 'mock mode',
+        stripeKeyExists: !!stripeKey,
+        stripeKeyLength: stripeKey ? stripeKey.length : 0,
+        stripeKeyPrefix: stripeKey ? stripeKey.substring(0, 10) + '...' : 'none',
         books: 'available'
     });
 });
