@@ -1,5 +1,13 @@
 const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_your_key_here');
+// Initialize Stripe with error handling
+let stripe;
+try {
+    stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_your_key_here');
+    console.log('Stripe initialized successfully');
+} catch (error) {
+    console.error('Stripe initialization error:', error);
+    stripe = null;
+}
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
@@ -73,6 +81,11 @@ app.use(express.static('.'));
 // Create Stripe Checkout session endpoint
 app.post('/create-checkout-session', async (req, res) => {
     try {
+        if (!stripe) {
+            console.error('Stripe not initialized');
+            return res.status(500).json({ error: 'Payment system not available' });
+        }
+        
         const { bookTitle, customerEmail, customerName } = req.body;
         
         console.log('Creating Stripe Checkout session');
