@@ -227,8 +227,18 @@ const elements = {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async function() {
+    console.log('DOM loaded, initializing app...');
+    
     // Load books from API first
     await loadBooksFromAPI();
+    
+    // Ensure books are loaded before initializing
+    if (Object.keys(bookDatabase).length === 0) {
+        console.log('No books loaded, using fallback');
+        bookDatabase = getFallbackBooks();
+    }
+    
+    console.log('Books loaded:', Object.keys(bookDatabase).length, 'genres');
     
     initializeEventListeners();
     initializeStripe();
@@ -379,6 +389,9 @@ function selectGenre(genre) {
 }
 
 function startSmoothTransition() {
+    console.log('Starting smooth transition for genre:', currentGenre);
+    console.log('Available books:', bookDatabase);
+    
     // Animate genre selection out
     const genreSelection = document.querySelector('.genre-selection');
     if (genreSelection) {
@@ -389,7 +402,15 @@ function startSmoothTransition() {
     setTimeout(() => {
         // Select a random book from the genre
         const books = bookDatabase[currentGenre];
+        console.log('Books for genre', currentGenre, ':', books);
+        
+        if (!books || books.length === 0) {
+            console.error('No books found for genre:', currentGenre);
+            return;
+        }
+        
         selectedBook = books[Math.floor(Math.random() * books.length)];
+        console.log('Selected book:', selectedBook);
         
         // Go directly to book reveal
         showBookReveal();
