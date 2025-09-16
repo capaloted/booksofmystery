@@ -89,6 +89,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Serve CSS file explicitly
+app.get('/styles.css', (req, res) => {
+    res.sendFile(path.join(__dirname, 'styles.css'));
+});
+
+// Serve JavaScript file explicitly
+app.get('/script.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'script.js'));
+});
+
 // Test endpoint
 app.get('/test', (req, res) => {
     res.json({ 
