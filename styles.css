@@ -5,26 +5,18 @@
     box-sizing: border-box;
 }
 
-html {
-    height: 100%;
-}
-
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    background-attachment: fixed;
     color: #fff;
     min-height: 100vh;
-    height: 100%;
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    min-height: calc(100vh - 40px);
 }
 
 /* Simple Header */
@@ -949,11 +941,6 @@ body {
 #success-screen {
     padding: 60px 0;
     text-align: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .success-container {
