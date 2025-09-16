@@ -1,6 +1,7 @@
 const express = require('express');
 
 // Initialize Stripe with comprehensive error handling
+// Updated to support both live and test keys
 let stripe = null;
 let stripeEnabled = false;
 
