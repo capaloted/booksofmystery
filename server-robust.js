@@ -6,10 +6,11 @@ let stripeEnabled = false;
 
 try {
     const stripeKey = process.env.STRIPE_SECRET_KEY;
-    if (stripeKey && stripeKey !== 'sk_test_your_key_here' && stripeKey.startsWith('sk_test_')) {
+    if (stripeKey && stripeKey !== 'sk_test_your_key_here' && (stripeKey.startsWith('sk_test_') || stripeKey.startsWith('sk_live_'))) {
         stripe = require('stripe')(stripeKey);
         stripeEnabled = true;
-        console.log('✅ Stripe initialized successfully with real key');
+        const keyType = stripeKey.startsWith('sk_live_') ? 'LIVE' : 'TEST';
+        console.log(`✅ Stripe initialized successfully with ${keyType} key`);
     } else {
         console.log('⚠️ Stripe key not set or invalid, using mock mode');
     }
@@ -121,11 +122,13 @@ app.get('/script.js', (req, res) => {
 // Test endpoint
 app.get('/test', (req, res) => {
     const stripeKey = process.env.STRIPE_SECRET_KEY;
+    const keyType = stripeKey ? (stripeKey.startsWith('sk_live_') ? 'LIVE' : stripeKey.startsWith('sk_test_') ? 'TEST' : 'UNKNOWN') : 'none';
     res.json({ 
         message: 'Server is working!', 
         timestamp: new Date().toISOString(),
         stripe: stripeEnabled ? 'enabled' : 'mock mode',
         stripeKeyExists: !!stripeKey,
+        stripeKeyType: keyType,
         stripeKeyLength: stripeKey ? stripeKey.length : 0,
         stripeKeyPrefix: stripeKey ? stripeKey.substring(0, 10) + '...' : 'none',
         books: 'available'
